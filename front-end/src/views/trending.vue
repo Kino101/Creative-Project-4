@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div class="trending">
     <div class="Feed">
       <div class="post" v-for="post in posts" :key="post.id">
         <h3 class="postText">{{post.heading}}</h3>
@@ -16,8 +16,6 @@
           <input v-model="post.heading" placeholder="Heading">
           <p></p>
           <textarea v-model="post.description" placeholder="Description"></textarea>
-          <input v-model="passcode" placeholder="Password">
-          <p></p>
           <div>
             <button @click="edit(post)">Submit Changes</button>
             <button @click="deletePost(post)">Delete Post</button>
@@ -30,15 +28,13 @@
 
 <script>
 // @ is an alias to /src
-//import HelloWorld from '@/components/HelloWorld.vue'
 import axios from 'axios'
 
 export default {
-  name: 'Home',
+  name: 'trending',
   data() {
     return {
       posts: [],
-      passcode: "",
     }
   },
   created() {
@@ -50,8 +46,8 @@ export default {
         let response = await axios.get("/api/posts");
         this.posts = response.data;
         this.posts.sort((a, b) => {
-          if(a._id < b._id) return 1;
-          if(b._id < a._id) return -1;
+          if(a.upvotes < b.upvotes) return 1;
+          if(b.upvotes < a.upvotes) return -1;
           return 0;
         });
         return true;
@@ -66,6 +62,11 @@ export default {
           upvotes: post.upvotes + 1,
         });
         post.upvotes = response.data.upvotes;
+        this.posts.sort((a, b) => {
+          if(a.upvotes < b.upvotes) return 1;
+          if(b.upvotes < a.upvotes) return -1;
+          return 0;
+        });
       } catch (error) {
         console.log(error);
       }
@@ -82,14 +83,10 @@ export default {
 
     async edit(post) {
       try {
-        let response = await axios.put("/api/posts/" + post._id, {
+        await axios.put("/api/posts/" + post._id, {
           heading: post.heading,
           description: post.description,
-          passcode: this.passcode,
         });
-        if(response.data === "Incorrect Password") {
-          this.passcode = response.data;
-        }
         this.getPosts();
         return true;
       } catch (error) {
@@ -99,10 +96,7 @@ export default {
 
     async deletePost(post) {
       try {
-        let response = await axios.delete('/api/posts/' + post._id + '/delete/' + this.passcode);
-        if(response.data === "Incorrect Password") {
-          this.passcode = response.data;
-        }
+        await axios.delete('/api/posts/' + post._id + '/delete');
         this.getPosts();
       } catch (error) {
         console.log(error);
@@ -113,7 +107,7 @@ export default {
 </script>
 
 <style scoped>
-.home {
+.trending {
   display: flex;
   justify-content: center;
 }
@@ -174,7 +168,7 @@ export default {
 
 .upvotes {
   display: flex;
-  min-width: 85px;
+  min-width: 90px;
   justify-content: space-between;
   height: 20px;
 }
