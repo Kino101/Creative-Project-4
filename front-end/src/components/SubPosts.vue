@@ -8,7 +8,7 @@
         <p class="comment">{{subPost.comment}}</p>
       </div>
       <div class="newComment">
-        <textarea v-model="newComment"></textarea>
+        <textarea v-model="newComment" placeholder="Write a comment"></textarea>
         <button @click="postComment">Post Comment</button>
       </div>
     </div>
@@ -65,16 +65,18 @@ export default {
 .comment {
   word-wrap: break-word;
   text-align: left;
-  padding: 2px;
+  padding: 5px;
   border-style: solid;
+  border-width: 1.5px;
+  border-radius: 5px;
   background-color: white;
 }
 .newComment {
-  background-color: green;
   display: flex;
   flex-direction: column;
 }
 .newComment textarea {
   width: inherit;
+  margin-bottom: 10px;
 }
 </style>

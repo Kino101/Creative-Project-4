@@ -1,9 +1,11 @@
 <template>
   <div id="app">
-    <h1>Pic Share</h1>
+    <div class="mainHeading">
+      <h1><img src="/Pic_Share_Logo.png" class="logo">Pic Share</h1>
+    </div>
     <div id="nav">
-      <router-link to="/">Recent Posts</router-link> |
-      <router-link to="/NewPost">New Post</router-link> |
+      <router-link to="/NewPost">New Post</router-link>
+      <router-link to="/">Recent Posts</router-link>
       <router-link to="/trending">Trending</router-link>
       <router-link to="/Search">Search</router-link>
     </div>
@@ -19,33 +21,75 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: black;
-  background-color: #EB89B5;
+  background: linear-gradient(to bottom right, #E7717D, #C2CAD0);
   position: relative;
   min-height: 100vh;
 }
 
+.logo {
+  width: 40px;
+  position: absolute;
+  left: 50px;
+  top: 5px;
+}
+.mainHeading {
+  margin-bottom: 0px;
+  background-color: #AFD275;
+}
+
 #nav {
-  padding: 30px;
+  padding: 15px;
+  display: flex;
+  justify-content: space-around;
+  background-color: white;
+  margin-bottom: 20px;
 }
 
 #nav a {
   font-weight: bold;
-  color: #2c3e50;
+  text-decoration: none;
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #AFD275;
+}
+
+#nav a:hover {
+  color: gray;
 }
 
 h1 {
   width: 100%;
   padding: 10px;
-  background-color: #FFD7E9;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+
+button {
+  background-color: #E7717D;
+  background: linear-gradient(to bottom right, #C2717D, #E7717D);
+  border-radius: 5px;
+  border-style: double;
+  border-color: #C2CAD0;
+}
+
+input, textarea {
+  padding: 2px 5px 2px 5px;
+}
+
+h2 {
+  text-decoration: underline;
+  margin-bottom: 20px;
+  font-style: italic;
+}
+
+h3 {
+  font-size: 20px;
 }
 
 .spacer {
-  height: 40px;
-  margin-top: 20px;
+  height: 50px;
+  margin-top: 30px;
 }
 
 .footer {
@@ -53,10 +97,20 @@ h1 {
   align-items: center;
   justify-content: center;
   font-size: 15px;
-  background-color: #FFD7E9;
+  background-color: #AFD275;
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 40px;
+  height: 50px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.footer > a:hover {
+  color: white;
+  text-decoration: none;
 }
 </style>

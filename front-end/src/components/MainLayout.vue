@@ -110,6 +110,7 @@ export default {
   max-height: 100px;
   overflow-y: auto;
   margin-bottom: 5px;
+  margin-top: 10px;
 }
 
 .upvoteAndEdit {

@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2>Recent Posts</h2>
     <MainLayout :posts="posts" :getPosts="getPosts"></MainLayout>
   </div>
 </template>

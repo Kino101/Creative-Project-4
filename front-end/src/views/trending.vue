@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h2>Trending</h2>
     <MainLayout :posts="posts" :getPosts="getPosts"></MainLayout>
   </div>
 </template>

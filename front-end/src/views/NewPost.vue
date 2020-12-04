@@ -1,6 +1,6 @@
 <template>
 <div>
-  <h1>Create A Post</h1>
+  <h2>Create A Post</h2>
   <div class="newPost">
     <div class="form">
       <div class="inputBoxes">
@@ -11,12 +11,12 @@
         <p></p>
       </div>
       <div class="uploadButton">
-        <input type="file" name="photo" @change="fileChanged">
+        <input class="fileButton" type="file" name="photo" @change="fileChanged">
         <button @click="upload">Upload</button>
       </div>
     </div>
     <div class="uploaded" v-if="addPost">
-      <h2>Successfully Posted!</h2>
+      <h3>Successfully Posted!</h3>
     </div>
   </div>
 </div>
@@ -66,12 +66,13 @@ export default {
   .newPost {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
   }
   .form {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-left: 10%;
   }
 
   .inputBoxes {
@@ -81,7 +82,7 @@ export default {
     width: auto;
   }
   .inputBoxes textarea, input{
-    width: 200px;
+    width: 250px;
   }
   .inputBoxes input {
     margin-top: 10px;
@@ -90,7 +91,14 @@ export default {
   .uploadButton {
     display: flex;
     margin-top: 10px;
+    margin-left: -5px;
+  }
+  .uploadButton input {
+    width: 195px;
   }
 
-  .uploaded {}
+  .uploaded {
+    margin-left: 8%;
+    margin-right: 8%;
+  }
 </style>

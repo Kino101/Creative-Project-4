@@ -1,8 +1,8 @@
 <template>
   <div class="searchPage">
-    <h2>Search By Heading</h2>
+    <h2>Search Posts</h2>
     <div class="searchInput">
-      <input v-model="findItem">
+      <input v-model="findItem" placeholder="Type in a post heading">
       <p></p>
       <button @click="search">Search</button>
     </div>
