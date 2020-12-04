@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import trending from '../views/trending.vue'
+import Search from '../views/Search.vue'
 
 Vue.use(VueRouter)
 
@@ -22,7 +23,12 @@ const routes = [
   {
     path: '/trending',
     name: 'trending',
-    component: trending
+    component: trending,
+  },
+  {
+    path: '/Search',
+    name: 'Search',
+    component: Search,
   }
 ]
 

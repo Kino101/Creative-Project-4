@@ -83,6 +83,9 @@ export default {
   .inputBoxes textarea, input{
     width: 200px;
   }
+  .inputBoxes input {
+    margin-top: 10px;
+  }
 
   .uploadButton {
     display: flex;

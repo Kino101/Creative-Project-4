@@ -26,6 +26,7 @@ const postSchema = new mongoose.Schema({
   upvotes: Number,
   path: String,
   editing: Boolean,
+  subPosts: Array,
 });
 
 const passwordSchema = new mongoose.Schema({
@@ -63,6 +64,7 @@ app.post('/api/posts', async (req, res) => {
     upvotes: req.body.upvotes,
     path: req.body.path,
     editing: false,
+    subPosts: [],
   });
   try {
     await post.save();
@@ -82,12 +84,9 @@ app.post('/api/posts', async (req, res) => {
 app.delete('/api/posts/:id/delete/:passcode', async (req, res) => {
   try {
     const passcode = req.params.passcode;
-    console.log("here");
-    console.log(passcode);
     const checkPassword = await Password.findOne({
       postId: req.params.id
     });
-    console.log(checkPassword);
     if(checkPassword != null && (checkPassword.passcode == passcode || checkPassword.adminPasscode == passcode)) {
       await Post.deleteOne({
         _id: req.params.id
@@ -154,7 +153,23 @@ app.put('/api/posts/:id/upvote', async (req, res) => {
     console.log(error);
     res.sendStatus(500);
   }
-})
+});
 
+app.put('/api/posts/:id/comment', async( req, res) => {
+  try {
+    const post = await Post.findOne({
+      _id: req.params.id
+    });
+    post.subPosts.push({
+      id: post.subPosts.length,
+      comment: req.body.comment,
+    });
+    await post.save();
+    res.send(post);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
 
 app.listen(3000, () => console.log('Server listening on port 3000!'));

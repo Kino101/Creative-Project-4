@@ -5,6 +5,7 @@
       <router-link to="/">Recent Posts</router-link> |
       <router-link to="/NewPost">New Post</router-link> |
       <router-link to="/trending">Trending</router-link>
+      <router-link to="/Search">Search</router-link>
     </div>
     <router-view/>
     <div class="spacer"><div class="footer"><a href="https://github.com/Kino101/Creative-Project-4">GitHub</a></div></div>

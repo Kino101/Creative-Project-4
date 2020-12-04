@@ -1,5 +1,11 @@
 <template>
-  <div>
+  <div class="searchPage">
+    <h2>Search By Heading</h2>
+    <div class="searchInput">
+      <input v-model="findItem">
+      <p></p>
+      <button @click="search">Search</button>
+    </div>
     <MainLayout :posts="posts" :getPosts="getPosts"></MainLayout>
   </div>
 </template>
@@ -11,13 +17,14 @@ import axios from 'axios'
 import MainLayout from '@/components/MainLayout.vue'
 
 export default {
-  name: 'Home',
+  name: 'Search',
   components: {
     MainLayout,
   },
   data() {
     return {
       posts: [],
+      findItem: "",
     }
   },
   created() {
@@ -27,17 +34,29 @@ export default {
     async getPosts() {
       try {
         let response = await axios.get("/api/posts");
-        this.posts = response.data;
-        this.posts.sort((a, b) => {
-          if(a._id < b._id) return 1;
-          if(b._id < a._id) return -1;
-          return 0;
-        });
+        this.posts = response.data.filter( (post) => post.heading.toLowerCase().search(this.findItem.toLowerCase()) >= 0);
         return true;
       } catch (error) {
         console.log(error);
       }
     },
+    search() {
+      this.getPosts();
+    }
   }
 }
 </script>
+
+<style scoped>
+.searchPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.searchInput {
+  display: flex;
+  width: 300px;
+  justify-content: space-around;
+  margin-bottom: 20px;
+}
+</style>
